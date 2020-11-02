@@ -3,13 +3,13 @@ import {Col} from "reactstrap";
 
 function List(props) {
 
-    const {list} = props;
+    const {list = {}, status = ''} = props;
 
     return (
 
-
-        <Col>
-            {list.map((el, index) =>
+        <div>
+        <h2>{status}</h2>
+            {list.filter(el => el.status === status).map((el, index) =>
                 <Todo
                     key={el.id}
                     todo={el}
@@ -18,9 +18,12 @@ function List(props) {
                     isFirst={index === 0}
                     deleteTodo={props.deleteTodo}
                     moveTodo={props.moveTodo}
+                    updateTodo={props.updateTodo}
+                    editTodo={props.editTodo}
                 />
             )}
-        </Col>
+            <hr/>
+        </div>
     );
 }
 

@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import {Container, Button} from "reactstrap";
+import {Container, Col, Button} from "reactstrap";
 import ModalAppTodo from "./ModalAddTodo";
 
 function Controller(props) {
@@ -13,13 +13,16 @@ function Controller(props) {
     return (
 
         <Container>
+            <Col>
             <ModalAppTodo
                 modal={modal}
                 addTodo={props.addTodo}
                 setModal={setModal}
             />
 
-            <Button onClick={addTodo}>Add Todo</Button>
+            <Button onClick={addTodo}>Add New Todo</Button>
+
+            </Col>
         </Container>
     );
 }

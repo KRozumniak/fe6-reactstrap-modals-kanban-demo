@@ -4,30 +4,40 @@ import {Modal, ModalBody, ModalHeader, ModalFooter, Input, Button, Label} from "
 function ModalDeleteTodo(props) {
 
     const [inputValue, setInputValue] = useState('');
-    const [buttonDisable, setButtonDisable] = useState(false);
+    const [buttonDisabled, setButtonDisabled] = useState(true);
+
+    const deleteButtonHandler = () => {
+        props.deleteTodo(props.todo.id);
+        props.setIsDeleteMode(false);
+    }
+
+    const inputHandler = (e) => {
+        setInputValue(e.target.value)
+        validate()
+    }
+
+    const validate = () => {
+        if (inputValue === props.todo.title) setButtonDisabled(false);
+        else setButtonDisabled(true)
+    }
 
     return (
         <div>
             <Modal isOpen={props.isDeleteMode}>
-                <ModalHeader>Delete {props.todo}?</ModalHeader>
+                <ModalHeader>Type <b>{props.todo.title}</b> to delete</ModalHeader>
                 <ModalBody>
 
-                    <Label>Title</Label>
                     <Input
                         type="text"
+                        value={inputValue}
+                        onChange={inputHandler}
                     />
 
-                    <Label>Status</Label>
-                    <Input
-                        type="select">
-                        <option value={true}>Done</option>
-                        <option value={false}>Not done</option>
-                    </Input>
                 </ModalBody>
                 <ModalFooter>
 
-                    <Button>Delete</Button>
-                    <Button>Calcel</Button>
+                    <Button disabled={buttonDisabled} onClick={deleteButtonHandler}>Delete</Button>
+                    <Button onClick={() => props.setIsDeleteMode(false)}>Cancel</Button>
                 </ModalFooter>
             </Modal>
         </div>

@@ -1,5 +1,6 @@
 import React, {useState} from "react";
 import {Modal, ModalBody, ModalHeader, ModalFooter, Input, Button, Label} from "reactstrap";
+import statuses from "./statuses";
 
 function ModalAppTodo(props) {
 
@@ -21,20 +22,19 @@ function ModalAppTodo(props) {
                 <ModalHeader>Add new Todo</ModalHeader>
                 <ModalBody>
 
-                    <Label>Title</Label>
+                    <Label>New title</Label>
                     <Input
                         type="text"
                         value={inputValue}
                         onChange={(e) => setInputValue(e.target.value)}
                     />
 
-                    <Label>Status</Label>
+                    <Label>New status</Label>
                     <Input
                         type="select"
                         value={statusSelectValue}
                         onChange={selectHandler}>
-                        <option value={true}>Done</option>
-                        <option value={false}>Not done</option>
+                        {statuses.map(el => <option key={el} value={el}>{el}</option>)}
                     </Input>
                 </ModalBody>
                 <ModalFooter>
